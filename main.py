@@ -63,29 +63,28 @@ def read_video(file_path):
         print(f"Error membaca video: {e}")
 
 
-# def main():
+def main():
+    """Fungsi utama untuk menjalankan program."""
+    parser = argparse.ArgumentParser(description="Program baca data (teks, gambar, video)")
+    parser.add_argument("file", help="Path ke file yang ingin dibaca")
+    args = parser.parse_args()
+
+    file_path = args.file
+    if not os.path.exists(file_path):
+        print("File tidak ditemukan.")
+        return
+
+    ext = os.path.splitext(file_path)[1].lower()
+
+    if ext in [".txt", ".md"]:
+        read_text(file_path)
+    elif ext in [".jpg", ".jpeg", ".png", ".bmp"]:
+        read_image(file_path)
+    elif ext in [".mp4", ".avi", ".mov", ".mkv"]:
+        read_video(file_path)
+    else:
+        print("Format file belum didukung.")
 
 
-
-# if __name__ == "__main__":
-#     main()
-
-parser = argparse.ArgumentParser(description="Program baca data (teks, gambar, video)")
-parser.add_argument("file", help="Path ke file yang ingin dibaca")
-args = parser.parse_args()
-
-file_path = args.file
-if not os.path.exists(file_path):
-    print("File tidak ditemukan.")
-    return
-
-ext = os.path.splitext(file_path)[1].lower()
-
-if ext in [".txt", ".md"]:
-    read_text(file_path)
-elif ext in [".jpg", ".jpeg", ".png", ".bmp"]:
-    read_image(file_path)
-elif ext in [".mp4", ".avi", ".mov", ".mkv"]:
-    read_video(file_path)
-else:
-    print("Format file belum didukung.")
+if __name__ == "__main__":
+    main()
