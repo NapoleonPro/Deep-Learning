@@ -63,17 +63,14 @@ def read_video(file_path):
         print(f"Error membaca video: {e}")
 
 
-def main():
-    """Fungsi utama untuk menjalankan program."""
-    parser = argparse.ArgumentParser(description="Program baca data (teks, gambar, video)")
-    parser.add_argument("file", help="Path ke file yang ingin dibaca")
-    args = parser.parse_args()
+parser = argparse.ArgumentParser(description="Program baca data (teks, gambar, video)")
+parser.add_argument("file", help="Path ke file yang ingin dibaca")
+args = parser.parse_args()
 
-    file_path = args.file
-    if not os.path.exists(file_path):
-        print("File tidak ditemukan.")
-        return
-
+file_path = args.file
+if not os.path.exists(file_path):
+    print("File tidak ditemukan.")
+else:
     ext = os.path.splitext(file_path)[1].lower()
 
     if ext in [".txt", ".md"]:
@@ -84,7 +81,3 @@ def main():
         read_video(file_path)
     else:
         print("Format file belum didukung.")
-
-
-if __name__ == "__main__":
-    main()
